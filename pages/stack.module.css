@@ -1,0 +1,48 @@
+.stack {
+  --gap: calc(1px * var(--lg-gap));
+  --direction: var(--lg-dir, row);
+  --align: var(--lg-align, center);
+  --justify: var(--lg-justify, flex-start);
+
+  display: flex;
+  flex-direction: var(--direction);
+  align-items: var(--align);
+  justify-content: var(--justify);
+  flex-wrap: wrap;
+
+  margin-top: calc(-1 * var(--gap));
+  margin-left: calc(-1 * var(--gap));
+
+  background: green;
+}
+
+.stack > * {
+  margin-top: var(--gap);
+  margin-left: var(--gap);
+
+  height: 40px;
+  width: 40px;
+  background: gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 960px) {
+  .stack {
+    --gap: calc(1px * var(--md-gap));
+    --direction: var(--md-dir);
+    --align: var(--md-align);
+    --justify: var(--md-justify);
+  }
+}
+
+@media (max-width: 600px) {
+  .stack {
+    --gap: calc(1px * var(--sm-gap));
+    --direction: var(--sm-dir);
+    --align: var(--sm-align);
+    --justify: var(--sm-justify);
+  }
+}
