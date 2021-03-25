@@ -1,9 +1,28 @@
 .stack {
-  --gap: calc(1px * var(--lg-gap));
-  --direction: var(--lg-dir, row);
-  --align: var(--lg-align, center);
-  --justify: var(--lg-justify, flex-start);
+  --base-gap: 24px;
+  --base-direction: row;
+  --base-align: stretch;
+  --base-justify: flex-start;
 
+  /* Inherit from screen size above */
+  --lg-gap: var(--base-gap);
+  --md-gap: var(--lg-gap);
+  --sm-gap: var(--md-gap);
+
+  --lg-dir: var(--base-dir);
+  --md-dir: var(--lg-dir);
+  --sm-dir: var(--md-dir);
+
+  --lg-align: var(--base-align);
+  --md-align: var(--lg-align);
+  --sm-align: var(--md-align);
+
+  --lg-justify: var(--base-justify);
+  --md-justify: var(--lg-justify);
+  --sm-justify: var(--md-justify);
+}
+
+.stack {
   display: flex;
   flex-direction: var(--direction);
   align-items: var(--align);
@@ -19,9 +38,8 @@
 .stack > * {
   margin-top: var(--gap);
   margin-left: var(--gap);
+  flex: 1;
 
-  height: 40px;
-  width: 40px;
   background: gray;
   display: flex;
   flex-direction: column;
@@ -29,9 +47,18 @@
   justify-content: center;
 }
 
+@media (min-width: 960px) {
+  .stack {
+    --gap: var(--lg-gap);
+    --direction: var(--lg-dir);
+    --align: var(--lg-align);
+    --justify: var(--lg-justify);
+  }
+}
+
 @media (max-width: 960px) {
   .stack {
-    --gap: calc(1px * var(--md-gap));
+    --gap: var(--md-gap);
     --direction: var(--md-dir);
     --align: var(--md-align);
     --justify: var(--md-justify);
@@ -40,7 +67,7 @@
 
 @media (max-width: 600px) {
   .stack {
-    --gap: calc(1px * var(--sm-gap));
+    --gap: var(--sm-gap);
     --direction: var(--sm-dir);
     --align: var(--sm-align);
     --justify: var(--sm-justify);

@@ -1,25 +1,9 @@
 const Index = () => {
   return (
     <Stack
-      gap={{ sm: 4, md: 32, lg: 16 }}
-      direction={{ sm: 'column', lg: 'row' }}
-      align={{ sm: 'center', md: 'flex-start', lg: 'center' }}
-      justify={{ sm: 'space-around', lg: 'space-between' }}
+      gap={{ lg: 6, sm: 1, md: 4 }}
+      direction={{ sm: 'column', lg: 'column', md: 'row' }}
     >
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
-      <div>hi</div>
       <div>hi</div>
       <div>hi</div>
     </Stack>
@@ -32,14 +16,24 @@ import styles from './stack.module.css'
 
 const breakpoints = ['sm', 'md', 'lg']
 
-function mapProperty(value, postfix) {
+const gapScale = [0, 4, 8, 16, 24, 32, 64]
+
+function mapProperty(value, postfix, unit = '', scale = []) {
   const obj = {}
 
-  breakpoints.forEach((breakpoint) => {
-    if (value[breakpoint]) {
-      obj[`--${breakpoint}-${postfix}`] = value[breakpoint]
-    }
-  })
+  if (typeof value !== 'object') {
+    const v = String(scale?.[value] || value) + unit
+    obj[`--${postfix}`] = v
+  } else {
+    breakpoints.forEach((breakpoint, i) => {
+      const v = value[breakpoint]
+      const key = `--${breakpoint}-${postfix}`
+
+      if (v) {
+        obj[key] = String(scale?.[v] || v) + unit
+      }
+    })
+  }
 
   return obj
 }
@@ -55,7 +49,7 @@ const Stack = ({
     <div
       className={styles.stack}
       style={{
-        ...mapProperty(gap, 'gap'),
+        ...mapProperty(gap, 'gap', 'px', gapScale),
         ...mapProperty(direction, 'dir'),
         ...mapProperty(align, 'align'),
         ...mapProperty(justify, 'justify')
