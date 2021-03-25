@@ -1,8 +1,8 @@
 const Index = () => {
   return (
     <Stack
-      gap={{ lg: 6, sm: 1, md: 4 }}
-      direction={{ sm: 'column', lg: 'column', md: 'row' }}
+      gap={{ sm: 6, lg: 0 }}
+      direction={{ sm: 'column' }}
     >
       <div>hi</div>
       <div>hi</div>
@@ -29,7 +29,7 @@ function mapProperty(value, postfix, unit = '', scale = []) {
       const v = value[breakpoint]
       const key = `--${breakpoint}-${postfix}`
 
-      if (v) {
+      if (v != null) {
         obj[key] = String(scale?.[v] || v) + unit
       }
     })
